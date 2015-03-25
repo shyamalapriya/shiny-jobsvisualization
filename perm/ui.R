@@ -6,7 +6,7 @@ library(shinydashboard)
 shinyUI(
   
   dashboardPage(
-    dashboardHeader(title = "Foreign worker data"),
+    dashboardHeader(title = "Perm Job Data"),
     dashboardSidebar(
       sidebarMenu(
         menuItem("Salary by Title", tabName = "title"),
@@ -27,7 +27,6 @@ shinyUI(
                               uiOutput('state')
                           ),
                     column(10,
-                          h4("Pay Scale"),
                           plotOutput("salaryPlot")
                    )
                  ),

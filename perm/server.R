@@ -1,7 +1,10 @@
 library(shiny)
+library(plyr)
 
 perm_data <- read.csv("./data/PERM_FY14_Q4.csv", header=T, stringsAsFactors=T)
-show_vars <- c("PW_Job_Title_9089", "Employer_Name", "PW_AMOUNT_9089")
+perm_data<- rename(perm_data, c("PW_Job_Title_9089"="Title", "Employer_Name"="Company", "PW_AMOUNT_9089"="Salary"))
+
+show_vars <- c("Title", "Company", "Salary")
 
 # Core wrapping function
 wrap.it <- function(x, len)
@@ -61,8 +64,8 @@ shinyServer(function(input,output){
       return(filteredData())
   })
   
-  aggr_dataset <- reactive({aggregate(filteredStateData()[["PW_AMOUNT_9089"]],
-                                      by=list(filteredStateData()[["PW_Job_Title_9089"]]), 
+  aggr_dataset <- reactive({aggregate(filteredStateData()[["Salary"]],
+                                      by=list(filteredStateData()[["Title"]]), 
                                      FUN=mean,
                                      na.rm=T)})
   
@@ -75,7 +78,7 @@ shinyServer(function(input,output){
             xlab="Job Title",
             ylab="Median Salary",
             ylim=c(0,250000),
-            main="Pay Scale",
+            main="Salary by Title",
             border="black")
   })
   
@@ -86,6 +89,6 @@ shinyServer(function(input,output){
   output$salaryTable<-renderDataTable({
     library(ggplot2)
     #diamonds[, input$show_vars, drop = FALSE]
-    filteredStateData()[,show_vars, drop=FALSE]
+    perm_data[,show_vars, drop=FALSE]
     })
 })
