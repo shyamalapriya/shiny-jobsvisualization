@@ -1,0 +1,27 @@
+library(shiny)
+
+# Define UI for Top Paying jobs application
+shinyUI(fluidPage(
+  
+  titlePanel("Foreign Worker Data Analysis"),
+  
+  sidebarLayout(
+    
+    sidebarPanel(
+      uiOutput('sector'),
+      uiOutput('state'),
+      width=2
+    ),
+    
+    mainPanel(
+      #h3(textOutput("text1")),
+      #dataTableOutput("salaryTable")
+      tabsetPanel(
+        tabPanel("Plot", plotOutput("salaryPlot")),
+        tabPanel("Summary", tableOutput("summary")),
+        tabPanel("Table", dataTableOutput("salaryTable"))
+      ), width=10
+    )
+  )
+    
+))
