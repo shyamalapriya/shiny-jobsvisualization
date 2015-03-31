@@ -12,7 +12,8 @@ shinyUI(
         menuItem("", tabName = ""),
         menuItem("", tabName = ""),
         menuItem("Salary by Title", tabName = "title"),
-        menuItem("Salary by Company", tabName = "company")
+        menuItem("Salary by Company", tabName = "company"),
+        menuItem("Top Countries getting perm", tabName = "top_country")
       )
       ),
     dashboardBody(
@@ -58,5 +59,15 @@ shinyUI(
                                     h4("Data Table"),
                                     dataTableOutput("companySalaryTable")))
                     )
+                  ))),
+        
+        # Third tab content
+        tabItem(tabName = "top_country",
+                fluidPage(
+                  fluidRow(
+                    column(12,
+                            h4("Top Countries"),
+                            plotOutput("topCountryPlot")))
+                    )
                   )))
-))))
+))
