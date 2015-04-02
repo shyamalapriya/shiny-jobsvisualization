@@ -1,27 +1,34 @@
 library(shiny)
+library(ggplot2)
+library(shinydashboard)
+library(BH)
 
 # Define UI for Top Paying jobs application
-shinyUI(fluidPage(
+shinyUI(
   
-  titlePanel("Foreign Worker Data Analysis"),
-  
-  sidebarLayout(
-    
-    sidebarPanel(
-      uiOutput('sector'),
-      uiOutput('state'),
-      width=2
+  fluidPage(
+    fluidRow(
+      column(12,
+             h3("Chegg Finance Metrics"),
+             fluidRow(
+               column(2,
+                      h5("Select Metrics"),
+                      uiOutput('metrics')
+               ),
+               column(10,
+                      h5("Metrics Plot"),
+                      plotOutput("metricPlot")
+               )
+             )
+      )
     ),
-    
-    mainPanel(
-      #h3(textOutput("text1")),
-      #dataTableOutput("salaryTable")
-      tabsetPanel(
-        tabPanel("Plot", plotOutput("salaryPlot")),
-        tabPanel("Summary", tableOutput("summary")),
-        tabPanel("Table", dataTableOutput("salaryTable"))
-      ), width=10
-    )
-  )
-    
-))
+    fluidRow(
+      column(12,
+             h3("Cheggs Salary Comparison"),
+             fluidRow(
+               column(12,
+                      plotOutput("salaryPlot")
+               )
+             ))))
+  
+)

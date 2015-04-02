@@ -9,14 +9,19 @@ shinyUI(
     dashboardHeader(title = "Perm Job Data"),
     dashboardSidebar(
       sidebarMenu(
-        menuItem("", tabName = ""),
-        menuItem("", tabName = ""),
+        menuItem("", tabName = "title"),
+        menuItem("", tabName = "title"),
         menuItem("Salary by Title", tabName = "title"),
         menuItem("Salary by Company", tabName = "company"),
-        menuItem("Top Countries getting perm", tabName = "top_country")
+        menuItem("Jobs by Foreign Workers Nationality", tabName = "top_country")
       )
       ),
-    dashboardBody(
+    dashboardBody(fluidPage(
+      fluidRow(
+        column(12,
+               conditionalPanel(condition="$('html').hasClass('shiny-busy')",
+                                tags$div("Loading..."))
+        ))),
       tabItems(
         # First tab content
         tabItem(tabName = "title",
@@ -66,8 +71,12 @@ shinyUI(
                 fluidPage(
                   fluidRow(
                     column(12,
-                            h4("Top Countries"),
-                            plotOutput("topCountryPlot")))
+                            h4("Countries Ranked by Most Numbers of Jobs"),
+                            plotOutput("topCountryPlot"))),
+                  fluidRow(
+                    column(12,
+                           h4("Countries by Jobs"),
+                           dataTableOutput("countryJobsTable")))
                     )
                   )))
 ))

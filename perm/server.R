@@ -186,6 +186,13 @@ shinyServer(function(input,output){
   output$topCountryPlot <- renderPlot({
     ggplot(top_10, aes(Year, Country, group= Year.rank, colour =factor(Year.rank))) + 
       geom_line(position="dodge",stat="identity") + theme(legend.title = element_text(colour="chocolate", size=16, face="bold"))+
-      scale_color_discrete(name="Rank")
+      scale_color_discrete(name="Rank") #+ scale_x_discrete(limits=orderlist)
   })
+  
+  output$countryJobsTable<-renderDataTable({
+    library(ggplot2)
+    #diamonds[, input$show_vars, drop = FALSE]
+    countrycounts_by_year
+  })
+  
 })

@@ -1,3 +1,4 @@
+library(reshape2)
 master_perm_data <- readRDS("./data/master_perm_data.rds")
 #my_count_table<-matrix(table(master_perm_data$country_of_citizenship, 
                              #master_perm_data$year))
@@ -26,3 +27,4 @@ top_10 <- transform(top_10, Country = factor(Country, levels = orderlist))
 
 #ggplot(top_10, aes(Year, Country, group= Year.rank, colour =factor(Year.rank))) + 
   #geom_line(position="dodge",stat="identity") + theme(legend.title=element_blank())
+countrycounts_by_year<-dcast(top_10,Country~Year, value.var="Count")
