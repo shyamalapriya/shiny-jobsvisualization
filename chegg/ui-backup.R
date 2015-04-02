@@ -10,8 +10,8 @@ shinyUI(
     dashboardHeader(title = "Chegg Data"),
     dashboardSidebar(
       sidebarMenu(
-        menuItem("", tabName = "metricstab"),
-        menuItem("", tabName = "metricstab"),
+        menuItem("", tabName = ""),
+        menuItem("", tabName = ""),
         menuItem("Finance Metrics Comparison", tabName = "metricstab"),
         menuItem("2014 Salary Comparison", tabName = "jobstab")
       )
@@ -25,7 +25,6 @@ shinyUI(
                     column(12,
                            fluidRow(
                              column(2,
-                                    h4("Inputs"),
                                     uiOutput('metrics')
                              ),
                              column(10,
@@ -39,11 +38,7 @@ shinyUI(
                   fluidRow(
                     column(12,
                            fluidRow(
-                             column(2,
-                                    h4("Inputs"),
-                                    uiOutput('title')
-                             ),
-                             column(10,
+                             column(12,
                                     plotOutput("salaryPlot")
                              )
                            )
